@@ -1,23 +1,20 @@
 import express from 'express'
 
-const app = express()
-const PORT = 3000
+const app = express();
+const PORT = 3000;
 
-app.get('/health',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send("jai shree ram")
-    const username = req.body.username
-    const password = req.body.password
-    const kidneyId = req.query.kidneyId
-    if(username === "chiru" && password === "123"){
-        if(kidneyId==1||kidneyId==2){
-            res.json({
-                "msg" : "your kidney is alright"
-            })
-        }else{
-            res.json({
-                "msg": "your kidney is bad"
-            })
-        }
-    }
-});
+})
+
+let duda = []
+let dudaId = 1
+
+app.post('/duda',(req,res)=>{
+    const name = req.params.body
+    const newDuda = {id:dudaId++,name}
+    duda.push(newDuda)
+    res.status(201).send(newDuda)
+})
+
 app.listen(PORT)
